@@ -1,0 +1,47 @@
+module tb;
+
+    logic clk = 0;
+    logic si, so;
+    logic [3:0] q_ref;
+
+    // Instantiate SISO shift register
+    siso dut (.*);
+
+    // Clock generation
+    always #5 clk = ~clk;
+
+    // Coverage group for serial input & MSB output
+    covergroup cg_siso @(posedge clk);
+        coverpoint si;
+        coverpoint so;
+        cross si, so;  // Track all input/output combinations
+    endgroup
+
+    cg_siso cg = new();
+
+    initial begin
+        // VCD waveform dump for Aldec / GTKWave
+        $dumpfile("siso.vcd");
+        $dumpvars(0, tb);
+
+        // Initialize reference
+        q_ref = 4'd0;
+
+        // Apply random serial inputs
+        repeat (20) begin
+            si = $urandom % 2;          // Random 0 or 1
+            q_ref = {q_ref[2:0], si};   // Predict expected output
+
+            @(posedge clk); #1;
+
+            // Sample coverage
+            cg.sample();
+        end
+
+        // Display coverage
+        $display("Total Coverage: %0.2f %%", cg.get_inst_coverage());
+
+        $finish;
+    end
+
+endmodule

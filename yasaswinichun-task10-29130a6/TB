@@ -1,0 +1,45 @@
+module tb;
+
+    logic clk = 0;
+    logic rst;
+    logic [1:0] color;
+
+    // Instantiate traffic light
+    traffic dut (
+        .clk(clk),
+        .rst(rst),
+        .color(color)
+    );
+
+    // Clock generation
+    always #5 clk = ~clk;
+
+    // Coverage group (Aldec-safe)
+    covergroup cg_light @(posedge clk);
+        coverpoint color;  // Track FSM states
+    endgroup
+
+    cg_light cg = new();
+
+    initial begin
+        // Memory-safe VCD dump
+        $dumpfile("traffic.vcd");
+        $dumpvars(0, dut);  // dump only DUT to save memory
+
+        // Reset
+        rst = 1; @(posedge clk);
+        rst = 0;
+
+        // Run only 20 cycles to stay under memory limit
+        repeat (20) @(posedge clk);
+
+        // Sample coverage
+        cg.sample();
+
+        // Display coverage
+        $display("Traffic Light Coverage: %0.2f %%", cg.get_inst_coverage());
+
+        $finish;
+    end
+
+endmodule

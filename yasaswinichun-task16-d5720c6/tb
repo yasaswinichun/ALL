@@ -1,0 +1,33 @@
+module tb;
+
+    // Signals
+    logic clk = 0;
+    logic req = 0;
+    logic gnt = 0;
+
+    // Clock generator
+    always #5 clk = ~clk;
+
+    // Handshake property: req implies gnt 2 cycles later
+    property p_handshake;
+        @(posedge clk) req |=> ##2 gnt;
+    endproperty
+
+    initial begin
+        // ---- DUMP WAVE ----
+        $dumpfile("handshake.vcd");
+        $dumpvars(0, tb);
+
+        // Assertion (Aldec-safe inside procedural block)
+        assert property (p_handshake)
+            else $error("Protocol Fail");
+
+        // Stimulus
+        @(posedge clk) req <= 1;
+        @(posedge clk) req <= 0;
+        @(posedge clk) gnt <= 1; // 2 cycles later → PASS
+
+        #50 $finish;
+    end
+
+endmodule

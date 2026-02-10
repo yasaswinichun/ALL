@@ -1,0 +1,15 @@
+module dff (
+    input  logic clk,    // Clock
+    input  logic rst,    // Reset (active high)
+    input  logic d,      // Data input
+    output logic q       // Output
+);
+
+    always_ff @(posedge clk or posedge rst) begin
+        if (rst)
+            q <= 1'b0;   // Reset output
+        else
+            q <= d;      // Latch data
+    end
+
+endmodule

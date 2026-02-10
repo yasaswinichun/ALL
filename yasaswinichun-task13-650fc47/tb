@@ -1,0 +1,27 @@
+module tb;
+
+    // Associative array
+    int mem[int];  
+    int addr;
+
+    initial begin
+        // Memory-safe VCD
+        $dumpfile("mem.vcd");
+        $dumpvars(0, tb);  // dump tb signals
+
+        // Fill array with random addresses and data
+        repeat (10) begin
+            addr = $urandom_range(0, 1000000);  // random address
+            mem[addr] = $urandom();             // random data
+            @(posedge 1);  // advance simulation for waveform
+        end
+
+        // Display contents
+        foreach (mem[idx]) begin
+            $display("Addr: %0d Data: %0h", idx, mem[idx]);
+        end
+
+        $finish;
+    end
+
+endmodule

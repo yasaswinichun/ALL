@@ -1,0 +1,54 @@
+module tb;
+
+    logic clk = 0;
+    logic rst;
+    logic [3:0] req;
+    logic [3:0] gnt;
+
+    // Instantiate arbiter
+    arbiter dut (
+        .clk(clk),
+        .rst(rst),
+        .req(req),
+        .gnt(gnt)
+    );
+
+    // Clock generation
+    always #5 clk = ~clk;
+
+    // Coverage group
+    covergroup cg_arb @(posedge clk);
+        coverpoint gnt;
+    endgroup
+    cg_arb cg = new();
+
+    // Simulation
+    initial begin
+        // Memory-safe VCD
+        $dumpfile("arbiter.vcd");
+        $dumpvars(0, dut);
+
+        // Reset
+        rst = 1; @(posedge clk);
+        rst = 0;
+
+        // Apply some requests
+        repeat (20) begin
+            req = $urandom % 16;  // random 4-bit requests
+            @(posedge clk); #1;
+
+            // Sample coverage
+            cg.sample();
+
+            // Immediate Assertion: only one grant at a time
+            assert ($onehot0(gnt))
+                else $error("Protocol Violation: Multiple Grants!");
+        end
+
+        // Display coverage
+        $display("Arbiter Coverage: %0.2f %%", cg.get_inst_coverage());
+
+        $finish;
+    end
+
+endmodule

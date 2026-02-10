@@ -1,0 +1,51 @@
+module tb;
+
+    logic clk = 0;
+    logic rst, d, q;
+
+    // Instantiate DFF
+    dff dut (.*);
+
+    // Clock generation
+    always #5 clk = ~clk;
+
+    // Random input packet class
+    class packet;
+        rand bit d;
+        rand bit rst;
+
+        // Weighted constraints
+        constraint c1 {
+            rst dist {0:=90, 1:=10};
+            d   dist {0:=90, 1:=10};
+        }
+    endclass
+
+    // Coverage group
+    covergroup cg @(posedge clk);
+        cross rst, d;   // Track all combinations of rst and d
+    endgroup
+
+    cg cinst = new();
+    packet pkt = new();
+
+    initial begin
+        // VCD waveform dump
+        $dumpfile("dff.vcd");
+        $dumpvars(0, tb);
+
+        repeat (100) begin
+            pkt.randomize();
+            rst <= pkt.rst;
+            d   <= pkt.d;
+
+            @(posedge clk);
+            cinst.sample();
+        end
+
+        // Display coverage at the end
+        $display("Coverage: %0.2f %%", cinst.get_inst_coverage());
+        $finish;
+    end
+
+endmodule

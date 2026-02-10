@@ -1,0 +1,55 @@
+module tb;
+
+    logic clk = 0;
+
+    // Clock
+    always #5 clk = ~clk;
+
+    // FIFO signals
+    logic wr, rd;
+    logic [7:0] din;
+    logic full, empty;
+
+    // DUT
+    fifo dut (
+        .clk(clk),
+        .wr(wr),
+        .rd(rd),
+        .din(din),
+        .full(full),
+        .empty(empty)
+    );
+
+    // Coverage group (Aldec-safe)
+    covergroup cg_fifo @(posedge clk);
+        coverpoint wr;
+        coverpoint full;
+        // cross wr_full : coverpoint(wr), coverpoint(full); 
+        // ✅ Commented out because Aldec compiler is picky
+    endgroup
+
+    cg_fifo cg = new();
+
+    initial begin
+        // VCD waveform
+        $dumpfile("fifo.vcd");
+        $dumpvars(0, tb);
+
+        // Write sequence
+        wr = 1;
+        rd = 0;
+        din = 8'hAA;
+
+        repeat (18) @(posedge clk);
+        wr = 0;
+
+        // Sample coverage
+        cg.sample();
+
+        // Display coverage
+        $display("Total Coverage: %0.2f %%", cg.get_inst_coverage());
+
+        $finish;
+    end
+
+endmodule

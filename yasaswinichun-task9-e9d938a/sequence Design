@@ -1,0 +1,33 @@
+module fsm101 (
+    input  logic clk,
+    input  logic rst,
+    input  logic in,
+    output logic out
+);
+
+    // FSM states
+    typedef enum logic [1:0] {S0, S1, S2} state_t;
+    state_t state, next;
+
+    // State register
+    always_ff @(posedge clk) begin
+        if (rst)
+            state <= S0;
+        else
+            state <= next;
+    end
+
+    // Transition logic (example)
+    always_comb begin
+        next = state;  // default hold
+        case(state)
+            S0: next = in ? S1 : S0;
+            S1: next = in ? S2 : S0;
+            S2: next = in ? S2 : S0;
+        endcase
+    end
+
+    // Output logic (example Moore)
+    assign out = (state == S2);
+
+endmodule

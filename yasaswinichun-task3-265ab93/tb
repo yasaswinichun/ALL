@@ -1,0 +1,39 @@
+module tb;
+
+    logic [3:0] in;
+    logic [1:0] out;
+    logic       valid;
+
+    // Instantiate DUT
+    priority_enc dut (.*);
+
+    // Covergroup
+    covergroup cg_enc;
+        cp_in : coverpoint in {
+            bins b0 = {1};  // 0001
+            bins b1 = {2};  // 0010
+            bins b2 = {4};  // 0100
+            bins b3 = {8};  // 1000
+            bins others = default;
+        }
+    endgroup
+
+    cg_enc cg = new();
+
+    initial begin
+        // --- WAVEFORM DUMP ---
+        $dumpfile("priority_enc.vcd");
+        $dumpvars(0, tb);
+
+        // --- RANDOM TEST ---
+        repeat (50) begin
+            in = $urandom_range(0, 15);  // 4-bit random input
+            #5;
+            cg.sample();                  // sample coverage
+        end
+
+        $display("Coverage: %0.2f%%", cg.get_inst_coverage());
+        $finish;
+    end
+
+endmodule

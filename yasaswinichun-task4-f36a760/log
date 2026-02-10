@@ -1,0 +1,99 @@
+[2026-01-29 15:27:50 UTC] vlib work && vlog '-timescale' '1ns/1ns' design.sv testbench.sv  && vsim -c -do "vsim +access+r; run -all; exit"  
+VSIMSA: Configuration file changed: `/home/runner/library.cfg'
+ALIB: Library "work" attached.
+work = /home/runner/work/work.lib
+MESSAGE "Unit top modules: tb_alu."
+SUCCESS "Compile success 0 Errors 0 Warnings  Analysis time: 0[s]."
+done
+# Aldec, Inc. Riviera-PRO version 2023.04.112.8911 built for Linux64 on May 12, 2023.
+# HDL, SystemC, and Assertions simulator, debugger, and design environment.
+# (c) 1999-2023 Aldec, Inc. All rights reserved.
+# ELBREAD: Elaboration process.
+# ELBREAD: Elaboration time 0.0 [s].
+# KERNEL: Main thread initiated.
+# KERNEL: Kernel process initialization phase.
+# ELAB2: Elaboration final pass...
+# KERNEL: PLI/VHPI kernel's engine initialization done.
+# PLI: Loading library '/usr/share/Riviera-PRO/bin/libsystf.so'
+# ELAB2: Create instances ...
+# KERNEL: Time resolution set to 1ns.
+# ELAB2: Create instances complete.
+# SLP: Started
+# SLP: Elaboration phase ...
+# SLP: Elaboration phase ... done : 0.0 [s]
+# SLP: Generation phase ...
+# SLP: Generation phase ... done : 0.1 [s]
+# SLP: Finished : 0.1 [s]
+# SLP: 0 primitives and 1 (50.00%) other processes in SLP
+# SLP: 1 (2.70%) signals in SLP and 7 (18.92%) interface signals
+# ELAB2: Elaboration final pass complete - time: 0.1 [s].
+# KERNEL: SLP loading done - time: 0.0 [s].
+# KERNEL: Warning: You are using the Riviera-PRO EDU Edition. The performance of simulation is reduced.
+# KERNEL: Warning: Contact Aldec for available upgrade options - sales@aldec.com.
+# KERNEL: SLP simulation initialization done - time: 0.0 [s].
+# KERNEL: Kernel process initialization done.
+# Allocation: Simulator allocated 5421 kB (elbread=455 elab2=4828 kernel=137 sdf=0)
+# KERNEL: ASDB file was created in location /home/runner/dataset.asdb
+# KERNEL: Cycle |   a   |   b   | op |   y
+# KERNEL: ------|-------|-------|----|-------
+# KERNEL:    5  |  34   | 206   | 11  | 238
+# KERNEL:   10  | 196   | 105   | 00  |  45
+# KERNEL:   15  | 203   |  38   | 10  |   2
+# KERNEL:   20  |  48   |  62   | 10  |  48
+# KERNEL:   25  | 142   |  96   | 00  | 238
+# KERNEL:   30  |  97   | 183   | 01  | 170
+# KERNEL:   35  |  35   | 237   | 11  | 239
+# KERNEL:   40  | 101   | 209   | 00  |  54
+# KERNEL:   45  |  13   | 143   | 11  | 143
+# KERNEL:   50  | 114   | 213   | 00  |  71
+# KERNEL:   55  |  73   |  84   | 10  |  64
+# KERNEL:   60  | 104   |  35   | 10  |  32
+# KERNEL:   65  | 175   | 246   | 00  | 165
+# KERNEL:   70  |   6   | 146   | 00  | 152
+# KERNEL:   75  |  46   | 254   | 00  |  44
+# KERNEL:   80  | 170   | 234   | 11  | 234
+# KERNEL:   85  |  54   |   2   | 01  |  52
+# KERNEL:   90  | 235   | 102   | 11  | 239
+# KERNEL:   95  | 222   | 206   | 10  | 206
+# KERNEL:  100  | 119   |  70   | 11  | 119
+# KERNEL:  105  | 181   |  94   | 01  |  87
+# KERNEL:  110  | 244   | 203   | 11  | 255
+# KERNEL:  115  |  57   | 243   | 10  |  49
+# KERNEL:  120  | 222   |  64   | 11  | 222
+# KERNEL:  125  | 105   | 161   | 10  |  33
+# KERNEL:  130  | 139   | 217   | 00  | 100
+# KERNEL:  135  | 241   |  52   | 10  |  48
+# KERNEL:  140  | 227   | 137   | 01  |  90
+# KERNEL:  145  | 216   |  55   | 11  | 255
+# KERNEL:  150  | 119   |  38   | 01  |  81
+# KERNEL:  155  | 196   | 126   | 01  |  70
+# KERNEL:  160  | 233   | 113   | 11  | 249
+# KERNEL:  165  |  40   | 141   | 01  | 155
+# KERNEL:  170  | 239   | 220   | 11  | 255
+# KERNEL:  175  | 250   | 171   | 11  | 251
+# KERNEL:  180  |  90   |  37   | 01  |  53
+# KERNEL:  185  | 194   | 129   | 00  |  67
+# KERNEL:  190  | 223   |  27   | 10  |  27
+# KERNEL:  195  |  34   | 149   | 11  | 183
+# KERNEL:  200  | 152   |  45   | 01  | 107
+# KERNEL:  205  |  40   |   9   | 10  |   8
+# KERNEL:  210  | 121   | 145   | 11  | 249
+# KERNEL:  215  |   9   |  92   | 11  |  93
+# KERNEL:  220  |  41   |  37   | 10  |  33
+# KERNEL:  225  |  19   |  35   | 11  |  51
+# KERNEL:  230  |   0   |  88   | 01  | 168
+# KERNEL:  235  | 251   | 244   | 11  | 255
+# KERNEL:  240  |  30   | 188   | 00  | 218
+# KERNEL:  245  | 209   | 252   | 00  | 205
+# KERNEL:  250  | 209   |  16   | 11  | 209
+# KERNEL: Coverage: 100.00 %
+# RUNTIME: Info: RUNTIME_0068 design.sv (44): $finish called.
+# KERNEL: Time: 250 ns,  Iteration: 0,  Instance: /tb_alu,  Process: @INITIAL#16_0@.
+# KERNEL: stopped at time: 250 ns
+# VSIM: Simulation has finished. There are no more test vectors to simulate.
+# ACDB: Covergroup Coverage data has been saved to "fcover.acdb" database.
+# VSIM: Simulation has finished.
+Finding VCD file...
+./alu.vcd
+[2026-01-29 15:27:53 UTC] Opening EPWave...
+Done

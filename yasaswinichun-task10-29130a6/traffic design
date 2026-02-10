@@ -1,0 +1,25 @@
+typedef enum logic [1:0] {RED, GREEN, YELLOW} light_t;
+
+module traffic (
+    input  logic clk,
+    input  logic rst,
+    output logic [1:0] color  // Aldec-safe output
+);
+
+    light_t color_reg;
+
+    always_ff @(posedge clk) begin
+        if (rst)
+            color_reg <= RED;
+        else
+            case(color_reg)
+                RED:    color_reg <= GREEN;
+                GREEN:  color_reg <= YELLOW;
+                YELLOW: color_reg <= RED;
+                default: color_reg <= RED;
+            endcase
+    end
+
+    assign color = color_reg;
+
+endmodule

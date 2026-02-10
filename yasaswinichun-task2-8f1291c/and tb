@@ -1,0 +1,23 @@
+module tb;
+
+    logic a, b, y;
+
+    // DUT
+    and_gate dut (.*);
+
+    initial begin
+        // ---- WAVEFORM DUMP ----
+        $dumpfile("wave.vcd");   // creates VCD file
+        $dumpvars(0, tb);        // dumps all signals in tb
+
+        // stimulus
+        repeat (20) begin
+            a = $urandom_range(0,1);
+            b = $urandom_range(0,1);
+            #5;
+        end
+
+        $finish;
+    end
+
+endmodule

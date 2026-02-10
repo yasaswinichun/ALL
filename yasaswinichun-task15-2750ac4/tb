@@ -1,0 +1,54 @@
+class Packet;
+    rand bit [7:0] val;
+endclass
+
+module tb;
+
+    // Mailbox for Packet objects
+    mailbox #(Packet) mbx = new();
+
+    // Clock for waveform (optional, just to advance time)
+    logic clk = 0;
+    always #5 clk = ~clk;
+
+    // Module variable for waveform
+    logic [7:0] val_sample;
+
+    // Generator task: produces packets and puts them in mailbox
+    task generator();
+        Packet p;
+        repeat (5) begin
+            p = new();
+            if (!p.randomize())
+                $display("Randomization failed!");
+            val_sample = p.val;   // copy for waveform
+            mbx.put(p);           // put packet in mailbox
+            @(posedge clk);       // advance time
+        end
+    endtask
+
+    // Driver task: consumes packets from mailbox
+    task driver();
+        Packet p;
+        repeat (5) begin
+            mbx.get(p);           // get packet
+            $display("Driver got: %0d", p.val);
+            @(posedge clk);       // advance time
+        end
+    endtask
+
+    initial begin
+        // VCD / waveform dump
+        $dumpfile("mailbox.vcd");
+        $dumpvars(0, tb);
+
+        // Run generator and driver in parallel
+        fork
+            generator();
+            driver();
+        join
+
+        $finish;
+    end
+
+endmodule

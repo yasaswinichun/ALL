@@ -1,0 +1,51 @@
+class Packet;
+    rand bit [7:0] data;
+
+    virtual function void print();
+        $display("Normal %0h", data); // No colon
+    endfunction
+endclass
+
+class BadPacket extends Packet;
+    virtual function void print();
+        $display("ERROR %0h", data); // No colon
+    endfunction
+endclass
+
+module tb;
+
+    Packet p;
+    BadPacket bad = new();
+
+    // Clock for waveform (optional, here just to advance time)
+    logic clk = 0;
+    always #5 clk = ~clk;
+
+    // Module variable for waveform dumping (optional)
+    logic [7:0] data_sample;
+
+    initial begin
+        // --- VCD / waveform dump ---
+        $dumpfile("packet.vcd");      // VCD filename
+        $dumpvars(0, tb);             // Dump everything in tb module
+
+        // Parent handle points to child object
+        p = bad;
+
+        repeat (10) begin
+            if (!p.randomize())
+                $display("Randomization failed!");
+
+            // Copy class data to module variable for waveform
+            data_sample = p.data;
+
+            // Polymorphic print
+            p.print();
+
+            @(posedge clk); // advance time for waveform
+        end
+
+        $finish; // end simulation
+    end
+
+endmodule

@@ -1,0 +1,48 @@
+module tb;
+
+    logic clk = 0;
+    logic rst;
+    logic in;
+    logic out;
+
+    // Instantiate FSM
+    fsm101 dut (
+        .clk(clk),
+        .rst(rst),
+        .in(in),
+        .out(out)
+    );
+
+    // Clock generation
+    always #5 clk = ~clk;
+
+    // Coverage group
+    covergroup cg_fsm @(posedge clk);
+        coverpoint dut.state;  // Track FSM states
+    endgroup
+
+    cg_fsm cg = new();
+
+    initial begin
+        // VCD dump
+        $dumpfile("fsm.vcd");
+        $dumpvars(0, tb);
+
+        // Initialize
+        rst = 1; in = 0; @(posedge clk);
+        rst = 0;
+
+        // Apply some random inputs
+        repeat (20) begin
+            in = $urandom % 2;   // Random 0 or 1
+            @(posedge clk); #1;
+            cg.sample();          // Sample coverage
+        end
+
+        // Display coverage
+        $display("FSM Coverage: %0.2f %%", cg.get_inst_coverage());
+
+        $finish;
+    end
+
+endmodule

@@ -1,0 +1,17 @@
+module siso (
+    input  logic clk,   // Clock
+    input  logic si,    // Serial input
+    output logic so     // Serial output
+);
+
+    logic [3:0] q;
+
+    // Output is MSB
+    assign so = q[3];
+
+    // Shift operation
+    always_ff @(posedge clk) begin
+        q <= {q[2:0], si};
+    end
+
+endmodule

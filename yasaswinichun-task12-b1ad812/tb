@@ -1,0 +1,49 @@
+module tb;
+
+    logic clk = 0;
+    logic rst;
+    logic [4:0] coin;
+    logic dispense;
+
+    // Instantiate vending machine
+    vending dut (
+        .clk(clk),
+        .rst(rst),
+        .coin(coin),
+        .dispense(dispense)
+    );
+
+    // Clock generation
+    always #5 clk = ~clk;
+
+    // Coverage group
+    covergroup cg_vend @(posedge clk);
+        coverpoint dut.state;
+    endgroup
+    cg_vend cg = new();
+
+    initial begin
+        // Memory-safe VCD
+        $dumpfile("vending.vcd");
+        $dumpvars(0, dut);
+
+        // Reset
+        rst = 1; @(posedge clk);
+        rst = 0;
+
+        // Apply random coins
+        repeat (20) begin
+            coin = ($urandom % 2) ? 5 : 10;  // random 5 or 10
+            @(posedge clk); #1;
+
+            // Sample coverage
+            cg.sample();
+        end
+
+        // Display coverage
+        $display("Vending Machine Coverage: %0.2f %%", cg.get_inst_coverage());
+
+        $finish;
+    end
+
+endmodule

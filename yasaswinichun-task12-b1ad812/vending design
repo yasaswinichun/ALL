@@ -1,0 +1,51 @@
+typedef enum logic [1:0] {IDLE, HAS5, HAS10} state_t;
+
+module vending (
+    input  logic clk,
+    input  logic rst,
+    input  logic [4:0] coin,  // only 5 or 10
+    output logic dispense
+);
+
+    state_t state, next;
+
+    // State register
+    always_ff @(posedge clk) begin
+        if (rst)
+            state <= IDLE;
+        else
+            state <= next;
+    end
+
+    // Next-state logic
+    always_comb begin
+        next = state;  // default hold
+        dispense = 0;
+        case (state)
+            IDLE: begin
+                if (coin == 5)
+                    next = HAS5;
+                else if (coin == 10) begin
+                    next = HAS10;
+                    dispense = 1; // dispense immediately
+                end
+            end
+            HAS5: begin
+                if (coin == 5) begin
+                    next = HAS10;
+                    dispense = 1;
+                end
+                else if (coin == 10) begin
+                    next = IDLE;
+                    dispense = 1;
+                end
+            end
+            HAS10: begin
+                // dispense, return to IDLE
+                next = IDLE;
+                dispense = 1;
+            end
+        endcase
+    end
+
+endmodule

@@ -1,0 +1,46 @@
+module tb_alu;
+
+    logic [7:0] a, b, y;
+    logic [1:0] op;
+
+    // Instantiate DUT
+    alu dut (.*);
+
+    // Covergroup to track opcode usage
+    covergroup cg_alu;
+        cp_op : coverpoint op; // Tracks 00,01,10,11
+    endgroup
+
+    cg_alu cg = new();
+
+    initial begin
+        // ---------------------------
+        // Waveform dump
+        // ---------------------------
+        $dumpfile("alu.vcd");
+        $dumpvars(0, tb_alu);
+
+        // ---------------------------
+        // Random stimulus + coverage + print
+        // ---------------------------
+        $display("Cycle |   a   |   b   | op |   y");
+        $display("------|-------|-------|----|-------");
+
+        repeat (50) begin
+            a = $urandom_range(0,255);
+            b = $urandom_range(0,255);
+            op = $urandom_range(0,3); // 0=ADD,1=SUB,2=AND,3=OR
+
+            #5;
+            cg.sample();
+
+            // Print values
+            $display("%4t  | %3d   | %3d   | %b  | %3d", 
+                      $time, a, b, op, y);
+        end
+
+        $display("Coverage: %0.2f %%", cg.get_inst_coverage());
+
+        $finish;
+    end
+endmodule
