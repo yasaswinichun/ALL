@@ -1,0 +1,96 @@
+[2026-01-28 14:18:48 UTC] vlib work && vlog '-timescale' '1ns/1ns' design.sv testbench.sv  && vsim -c -do "vsim +access+r; run -all; exit"  
+VSIMSA: Configuration file changed: `/home/runner/library.cfg'
+ALIB: Library "work" attached.
+work = /home/runner/work/work.lib
+MESSAGE "Unit top modules: tb."
+SUCCESS "Compile success 0 Errors 0 Warnings  Analysis time: 0[s]."
+done
+# Aldec, Inc. Riviera-PRO version 2023.04.112.8911 built for Linux64 on May 12, 2023.
+# HDL, SystemC, and Assertions simulator, debugger, and design environment.
+# (c) 1999-2023 Aldec, Inc. All rights reserved.
+# ELBREAD: Elaboration process.
+# ELBREAD: Elaboration time 0.0 [s].
+# KERNEL: Main thread initiated.
+# KERNEL: Kernel process initialization phase.
+# ELAB2: Elaboration final pass...
+# KERNEL: PLI/VHPI kernel's engine initialization done.
+# PLI: Loading library '/usr/share/Riviera-PRO/bin/libsystf.so'
+# ELAB2: Create instances ...
+# KERNEL: Time resolution set to 1ns.
+# ELAB2: Create instances complete.
+# SLP: Started
+# SLP: Elaboration phase ...
+# SLP: Elaboration phase ... done : 0.0 [s]
+# SLP: Generation phase ...
+# SLP: Generation phase ... done : 0.0 [s]
+# SLP: Finished : 0.1 [s]
+# SLP: 0 primitives and 1 (50.00%) other processes in SLP
+# SLP: 2 (1.18%) signals in SLP and 6 (3.53%) interface signals
+# ELAB2: Elaboration final pass complete - time: 0.1 [s].
+# KERNEL: SLP loading done - time: 0.0 [s].
+# KERNEL: Warning: You are using the Riviera-PRO EDU Edition. The performance of simulation is reduced.
+# KERNEL: Warning: Contact Aldec for available upgrade options - sales@aldec.com.
+# KERNEL: SLP simulation initialization done - time: 0.0 [s].
+# KERNEL: Kernel process initialization done.
+# Allocation: Simulator allocated 5480 kB (elbread=459 elab2=4876 kernel=145 sdf=0)
+# KERNEL: ASDB file was created in location /home/runner/dataset.asdb
+# KERNEL:  Starting ALU Verification 
+# KERNEL: Op: MUL | A:  35 | B: 212 | Res:  7420
+# KERNEL: Op: XOR | A: 187 | B:  88 | Res:   227
+# KERNEL: Op: ADD | A:  10 | B: 186 | Res:   196
+# KERNEL: Op: ADD | A: 141 | B:  36 | Res:   177
+# KERNEL: Op: XOR | A:  81 | B: 203 | Res:   154
+# KERNEL: Op: SUB | A:  17 | B: 115 | Res: 65438
+# KERNEL: Op: SUB | A: 131 | B:  56 | Res:    75
+# KERNEL: Op: ADD | A: 238 | B: 138 | Res:   376
+# KERNEL: Op: XOR | A:   0 | B: 120 | Res:   120
+# KERNEL: Op: MUL | A: 225 | B: 221 | Res: 49725
+# KERNEL: Op: SUB | A: 132 | B: 123 | Res:     9
+# KERNEL: Op: SUB | A: 134 | B:  44 | Res:    90
+# KERNEL: Op: XOR | A:   4 | B: 124 | Res:   120
+# KERNEL: Op: XOR | A: 192 | B:  60 | Res:   252
+# KERNEL: Op: XOR | A:  73 | B: 222 | Res:   151
+# KERNEL: Op: XOR | A:  88 | B:   3 | Res:    91
+# KERNEL: Op: ADD | A: 125 | B:  82 | Res:   207
+# KERNEL: Op: ADD | A: 250 | B: 139 | Res:   389
+# KERNEL: Op: ADD | A: 239 | B: 219 | Res:   458
+# KERNEL: Op: ADD | A: 182 | B: 113 | Res:   295
+# KERNEL: Op: SUB | A: 144 | B:  80 | Res:    64
+# KERNEL: Op: SUB | A: 128 | B: 103 | Res:    25
+# KERNEL: Op: MUL | A: 119 | B: 222 | Res: 26418
+# KERNEL: Op: XOR | A: 176 | B: 178 | Res:     2
+# KERNEL: Op: XOR | A:  93 | B: 131 | Res:   222
+# KERNEL: Op: XOR | A: 131 | B: 172 | Res:    47
+# KERNEL: Op: SUB | A:  34 | B: 148 | Res: 65422
+# KERNEL: Op: XOR | A: 152 | B:  67 | Res:   219
+# KERNEL: Op: SUB | A:  70 | B:  56 | Res:    14
+# KERNEL: Op: XOR | A: 115 | B: 120 | Res:    11
+# KERNEL: Op: ADD | A: 112 | B: 234 | Res:   346
+# KERNEL: Op: ADD | A: 253 | B: 226 | Res:   479
+# KERNEL: Op: ADD | A: 235 | B: 251 | Res:   486
+# KERNEL: Op: SUB | A:   2 | B:  41 | Res: 65497
+# KERNEL: Op: ADD | A:  36 | B:  13 | Res:    49
+# KERNEL: Op: MUL | A: 207 | B: 178 | Res: 36846
+# KERNEL: Op: ADD | A: 107 | B:  45 | Res:   152
+# KERNEL: Op: XOR | A: 105 | B:  32 | Res:    73
+# KERNEL: Op: SUB | A:  35 | B:  61 | Res: 65510
+# KERNEL: Op: ADD | A: 209 | B: 198 | Res:   407
+# KERNEL: Op: XOR | A:  63 | B:  46 | Res:    17
+# KERNEL: Op: XOR | A: 192 | B: 255 | Res:    63
+# KERNEL: Op: ADD | A:  98 | B: 254 | Res:   352
+# KERNEL: Op: ADD | A:  98 | B: 140 | Res:   238
+# KERNEL: Op: XOR | A: 226 | B:  78 | Res:   172
+# KERNEL: Op: SUB | A: 217 | B:  16 | Res:   201
+# KERNEL: Op: XOR | A:  74 | B: 230 | Res:   172
+# KERNEL: Op: SUB | A: 184 | B: 148 | Res:    36
+# KERNEL: Op: MUL | A: 216 | B:  47 | Res: 10152
+# KERNEL: Op: MUL | A:  17 | B: 136 | Res:  2312
+# KERNEL:  Final Coverage: 100.00 %
+# KERNEL:  STATUS: PASSED (All Opcodes Tested)
+# KERNEL: Simulation has finished. There are no more test vectors to simulate.
+# ACDB: Covergroup Coverage data has been saved to "fcover.acdb" database.
+# VSIM: Simulation has finished.
+Finding VCD file...
+./dump.vcd
+[2026-01-28 14:18:51 UTC] Opening EPWave...
+Done

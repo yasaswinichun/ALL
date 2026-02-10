@@ -1,0 +1,52 @@
+[2026-01-29 13:00:44 UTC] vlib work && vlog '-timescale' '1ns/1ns' design.sv testbench.sv  && vsim -c -do "vsim +access+r; run -all; exit"  
+VSIMSA: Configuration file changed: `/home/runner/library.cfg'
+ALIB: Library "work" attached.
+work = /home/runner/work/work.lib
+MESSAGE "Unit top modules: dummy_dut tb."
+SUCCESS "Compile success 0 Errors 0 Warnings  Analysis time: 0[s]."
+done
+# Aldec, Inc. Riviera-PRO version 2023.04.112.8911 built for Linux64 on May 12, 2023.
+# HDL, SystemC, and Assertions simulator, debugger, and design environment.
+# (c) 1999-2023 Aldec, Inc. All rights reserved.
+# ELBREAD: Elaboration process.
+# ELBREAD: Elaboration time 0.0 [s].
+# KERNEL: Main thread initiated.
+# KERNEL: Kernel process initialization phase.
+# ELAB2: Elaboration final pass...
+# KERNEL: PLI/VHPI kernel's engine initialization done.
+# PLI: Loading library '/usr/share/Riviera-PRO/bin/libsystf.so'
+# ELAB2: Create instances ...
+# KERNEL: Time resolution set to 1ns.
+# ELAB2: Create instances complete.
+# SLP: Started
+# SLP: Elaboration phase ...
+# SLP: Elaboration phase ... skipped, nothing to simulate in SLP mode : 0.0 [s]
+# SLP: Finished : 0.0 [s]
+# ELAB2: Elaboration final pass complete - time: 0.0 [s].
+# KERNEL: Warning: You are using the Riviera-PRO EDU Edition. The performance of simulation is reduced.
+# KERNEL: Warning: Contact Aldec for available upgrade options - sales@aldec.com.
+# KERNEL: Kernel process initialization done.
+# Allocation: Simulator allocated 4787 kB (elbread=459 elab2=4180 kernel=147 sdf=0)
+# KERNEL: ASDB file was created in location /home/runner/dataset.asdb
+# KERNEL:  Challenge: The 8-Byte Packet Verification
+# KERNEL: --- Iteration 1 ---
+# KERNEL: Packet [RandomPkt]: len=5 | payload size=5 | data='{35, 212, 223, 173, 187}
+# KERNEL: --- Iteration 2 ---
+# KERNEL: Packet [RandomPkt]: len=4 | payload size=4 | data='{216, 10, 186, 139}
+# KERNEL: --- Iteration 3 ---
+# KERNEL: Packet [RandomPkt]: len=5 | payload size=5 | data='{36, 249, 153, 81, 203}
+# KERNEL: --- Iteration 4 ---
+# KERNEL: Packet [RandomPkt]: len=7 | payload size=7 | data='{171, 17, 115, 23, 222, 131, 56}
+# KERNEL: --- Iteration 5 ---
+# KERNEL: Packet [RandomPkt]: len=8 | payload size=8 | data='{138, 14, 66, 0, 120, 213, 225, 221}
+# KERNEL:  Final Coverage: 100.00 %
+# RUNTIME: Info: RUNTIME_0068 testbench.sv (56): $finish called.
+# KERNEL: Time: 100 ns,  Iteration: 0,  Instance: /tb,  Process: @INITIAL#30_0@.
+# KERNEL: stopped at time: 100 ns
+# VSIM: Simulation has finished. There are no more test vectors to simulate.
+# ACDB: Covergroup Coverage data has been saved to "fcover.acdb" database.
+# VSIM: Simulation has finished.
+Finding VCD file...
+./dump.vcd
+[2026-01-29 13:00:47 UTC] Opening EPWave...
+Done
